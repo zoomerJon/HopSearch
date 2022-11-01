@@ -1,0 +1,164 @@
+import { createContext, useEffect, useReducer, useState } from "react";
+import ActiveTagReducer from "./ActiveTagReducer";
+import groupData from "../SampleData/groupData";
+
+const ActiveTagContext = createContext();
+
+export const ActiveTagProvider = ({ children }) => {
+  const initialState = [
+    { Campus: [] },
+    { Demographic: [] },
+    { Gender: [] },
+    { Topic: [] },
+    { Days: [] },
+    { InPerson: [] },
+  ];
+  const [activeTagsArr, setActiveTagsArr] = useState([]);
+  const [groupList, setGroupList] = useState([]);
+  const [foundGroups, setFoundGroups] = useState([]);
+  const [tagsActive, setTagsActive] = useState(false);
+
+  const [state, dispatch] = useReducer(ActiveTagReducer, initialState);
+
+  useEffect(() => {
+    setActiveTagsArr(state.map((obj) => Object.values(obj)).flat(2));
+
+    // console.log(state);
+    // console.log("ActiveTagProvider Mounted");
+    findGroups(state);
+    fetchData();
+  }, state);
+
+  // Fetch Data
+  const fetchData = () => {
+    setGroupList(groupData);
+  };
+
+  // Set Tag
+  const setTag = (filter, tag) => {
+    if (activeTagsArr.length === 0) {
+      // Set activeTags to true
+      setTagsActive(true);
+    }
+    dispatch({
+      type: "SET_TAG",
+      payload: { filter, tag },
+    });
+    // findGroupsTag([...state, tag]);
+  };
+
+  // Remove Tag
+  const removeTag = (filter, tag) => {
+    if (activeTagsArr.length === 1) {
+      // Set activeTags to false
+      setTagsActive(false);
+    }
+    dispatch({
+      type: "REMOVE_TAG",
+      payload: { filter, tag },
+    });
+    // console.log(state);
+    // findGroupsTag(state.filter((arrTag) => arrTag !== tag));
+  };
+
+  // Search for groups with tags
+  const findGroups = (tags) => {
+    // const groups = tags
+    //   .map((tag) => groupList.filter((group) => group.Tags.includes(tag)))
+    //   .filter((group) => group.length !== 0);
+    // console.log({ ...groups });
+    const allGroups = groupList;
+    const groups = tags.reduce((prevGroups, currGroups) => {
+      if (Object.values(currGroups)[0].length === 0) {
+        console.log("nope");
+        return prevGroups;
+      } else {
+        const foundGroups = Object.values(currGroups)[0].map((tag) => {
+          const filter = Object.keys(currGroups)[0];
+          // const filter =
+          //   Object.keys(currGroups)[0] === "InPerson"
+          //     ? "In Person"
+          //     : Object.keys(currGroups)[0];
+          console.log(filter);
+          // console.log(group[`${filter}`]);
+          return prevGroups.filter((group) => group[`${filter}`].includes(tag));
+        });
+        // console.log(Object.values(currGroups)[0]);
+        // console.log(
+
+        // );
+        return foundGroups.flat();
+      }
+    }, allGroups);
+    console.log(groups);
+    setFoundGroups(groups);
+  };
+  const addActiveClass = (options) => {
+    options.forEach((option) => {
+      document.getElementsByClassName(`${option}`)[0].classList.add("active");
+    });
+  };
+  const removeAllActiveClass = () => {
+    // Remove active class from all tag divs
+    activeTagsArr.forEach((tag) => {
+      document
+        .getElementsByClassName(`${tag.replace(/\s+/g, "")}`)[0]
+        .classList.remove("active");
+    });
+
+    // Hide clear-local-tags divs
+    const clearTagsArr = document.querySelectorAll(`.clear-local-tags`);
+    for (const clearTag of clearTagsArr) {
+      clearTag.classList.add("hide");
+    }
+
+    // activeTagsArr.forEach()
+  };
+  const clearAllTags = () => {
+    removeAllActiveClass();
+    setTagsActive(false);
+    dispatch({
+      type: "CLEAR_ALL_TAGS",
+      payload: { initialState },
+    });
+  };
+  const clearLocalTags = (filter) => {
+    const localActiveTags = state.find((obj) => obj[filter])[filter];
+    console.log(localActiveTags);
+    localActiveTags.forEach((tag) =>
+      document
+        .getElementsByClassName(`${tag.replace(/\s+/g, "")}`)[0]
+        .classList.remove("active")
+    );
+    if (localActiveTags.length === activeTagsArr.length) {
+      setTagsActive(false);
+    }
+
+    document.getElementsByClassName(`${filter}-clear`)[0].classList.add("hide");
+    dispatch({
+      type: "CLEAR_LOCAL_TAGS",
+      payload: { filter },
+    });
+  };
+  return (
+    <ActiveTagContext.Provider
+      value={{
+        activeTagsArr,
+        addActiveClass,
+        clearAllTags,
+        clearLocalTags,
+        findGroups,
+        foundGroups,
+        removeTag,
+        setTag,
+        setTagsActive,
+        tags: state,
+        tagsActive,
+      }}
+    >
+      {children}
+    </ActiveTagContext.Provider>
+  );
+};
+
+export default ActiveTagContext;
