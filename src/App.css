@@ -161,8 +161,8 @@ body {
   margin: 5px 10px;
   padding: 5px;
   /* vertical-align: middle; */
-  /* height: 2em;
-  line-height: 2em; */
+  /* height: 2em; */
+  /* line-height: 2em; */
 }
 
 .active-tag svg {
