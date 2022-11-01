@@ -110,8 +110,9 @@ body {
 }
 
 .group-card {
-  display: flex;
   align-items: center;
+  display: flex;
+  cursor: pointer;
   margin: 20px 0;
   border-bottom: #ccc 2px solid;
 }
