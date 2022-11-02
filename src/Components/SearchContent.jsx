@@ -37,6 +37,31 @@ function SearchContent() {
               height="150px"
             />
           </>
+          <br />
+          <h3>Others</h3>
+          <br />
+          <>
+            <img
+              src={require("../Images/Group-Images/zoom.jpg")}
+              alt=""
+              height="150px"
+            />
+            <img
+              src={require("../Images/Group-Images/women.jpg")}
+              alt=""
+              height="150px"
+            />
+            <img
+              src={require("../Images/Group-Images/men.jpg")}
+              alt=""
+              height="150px"
+            />
+            <img
+              src={require("../Images/Group-Images/everyone.jpg")}
+              alt=""
+              height="150px"
+            />
+          </>
         </>
       )}
       {tagsActive && <ActiveTags />}
