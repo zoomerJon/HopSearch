@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ActiveTagContext from "../Context/ActiveTagContext";
-import Demographic from "./Demographic";
 
-function FilterOptions({ options, filter, toggleOverlay }) {
+export default function Demographic({ options, filter, toggleOverlay }) {
   const {
     activeTagsArr,
     clearLocalTags,
@@ -13,8 +12,12 @@ function FilterOptions({ options, filter, toggleOverlay }) {
     tagsActive,
   } = useContext(ActiveTagContext);
   const [show, setShow] = useState(false);
+  useEffect(() => {
+    // test = "<div>test</div>;";
+  }, []);
 
   const handleClick = (e, filter) => {
+    console.log(options);
     // console.log(tags.map((obj) => Object.values(obj)).flat(2));
     const tag = e.target.innerText;
     const localActiveTags = tags.find((obj) => obj[filter])[filter];
@@ -24,7 +27,7 @@ function FilterOptions({ options, filter, toggleOverlay }) {
         // // Set activeTags to false
         // setTagsActive(false);
         document
-          .getElementsByClassName(`${filter}-clear`)[0]
+          .getElementsByClassName(`Demographic-clear`)[0]
           .classList.add("hide");
         setShow(false);
       }
@@ -34,13 +37,19 @@ function FilterOptions({ options, filter, toggleOverlay }) {
         // // Set activeTags to true
         // setTagsActive(true);
         document
-          .getElementsByClassName(`${filter}-clear`)[0]
+          .getElementsByClassName(`Demographic-clear`)[0]
           .classList.remove("hide");
       }
       setShow(true);
       setTag(filter, tag);
     }
     e.target.classList.toggle("active");
+  };
+
+  const clearAllLocalTags = () => {
+    clearLocalTags("Married");
+    clearLocalTags("Singles");
+    clearLocalTags("Youth");
   };
   // const clearLocalTags = (filter) => {
   //   const localActiveTags = tags.find((obj) => obj[filter])[filter];
@@ -50,7 +59,7 @@ function FilterOptions({ options, filter, toggleOverlay }) {
     <div className={`filter-options-container ${filter}-options hide`}>
       <div className="filter-options-container-mobile">
         <div className="filter-heading-mobile">
-          <h2>{filter === "InPerson" ? "In Person" : filter}</h2>
+          <h2>{filter}</h2>
           <p
             onClick={() => {
               toggleOverlay(filter.replace(/\s+/g, ""));
@@ -62,59 +71,41 @@ function FilterOptions({ options, filter, toggleOverlay }) {
         {
           <div
             className={`clear-local-tags ${filter}-clear hide`}
-            onClick={() => clearLocalTags(filter)}
+            onClick={() => clearAllLocalTags()}
           >
             Clear Tags
           </div>
         }
         <div className={`filter-options `}>
-          {filter === "Demographic" && (
-            <div
-              className={`filter-option EveryoneWelcome`}
-              key={"key"}
-              onClick={(e) => handleClick(e, "Demographic")}
-            >
-              Everyone Welcome
-            </div>
-          )}
-          {filter === "Demographic"
-            ? Object.keys(options).map((subfilter, i) => {
-                return (
-                  <div key={i} className="demographics-suboption">
-                    <h5>{subfilter}</h5>
-                    {options[subfilter].map((option, i) => (
-                      <div
-                        className={`filter-option ${option.replace(
-                          /\s+/g,
-                          ""
-                        )}`}
-                        key={i}
-                        onClick={(e) => handleClick(e, filter)}
-                      >
-                        {option}
-                      </div>
-                    ))}
+          <div
+            className={`filter-option Everyone-Welcome`}
+            key={"key"}
+            onClick={(e) => handleClick(e, "Demographic")}
+          >
+            Everyone Welcome
+          </div>
+          {Object.keys(options).map((subfilter, i) => {
+            return (
+              <div key={i} className="demographics-suboption">
+                <h5>{subfilter}</h5>
+                {options[subfilter].map((option, i) => (
+                  <div
+                    className={`filter-option ${option.replace(/\s+/g, "")}`}
+                    key={i}
+                    onClick={(e) => handleClick(e, filter)}
+                  >
+                    {option}
                   </div>
-                );
-              })
-            : options.map((option, i) => (
-                <div
-                  className={`filter-option ${option.replace(/\s+/g, "")}`}
-                  key={i}
-                  onClick={(e) => handleClick(e, filter)}
-                >
-                  {option}
-                </div>
-              ))}
-          {/* {options.map((option, i) => (
-            <div
-              className={`filter-option ${option.replace(/\s+/g, "")}`}
-              key={i}
-              onClick={(e) => handleClick(e, filter)}
-            >
-              {option}
-            </div>
-          ))} */}
+                ))}
+              </div>
+            );
+          })}
+          {/* <div
+            className={`filter-option`}
+            onClick={(e) => handleClick(e, filter)}
+          >
+            demographic things
+          </div> */}
           {/* {options.map((option, i) => (
             <div
               className={`filter-option ${option.replace(/\s+/g, "")}`}
@@ -129,5 +120,3 @@ function FilterOptions({ options, filter, toggleOverlay }) {
     </div>
   );
 }
-
-export default FilterOptions;

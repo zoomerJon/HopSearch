@@ -7,10 +7,10 @@ function SearchItem({ group }) {
           .join("")}
       </div>
       <div className="group-info">
-        <h3 className="group-day-time">{`${group.Days}s at ${group.Time} (UTC -7)`}</h3>
+        <h3 className="group-day-time">{`${group.Days}s at ${group.Time} (UTC -8)`}</h3>
         <div>{group.Leader}</div>
         <div>{group.Group}</div>
-        <div>In-Person</div>
+        <div>{group.Demographic}</div>
       </div>
     </div>
   );

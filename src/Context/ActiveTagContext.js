@@ -8,10 +8,12 @@ export const ActiveTagProvider = ({ children }) => {
   const initialState = [
     { Campus: [] },
     { Demographic: [] },
+    { Youth: [] },
     { Gender: [] },
-    { Topic: [] },
+    { Language: [] },
     { Days: [] },
     { InPerson: [] },
+    { Childcare: [] },
   ];
   const [activeTagsArr, setActiveTagsArr] = useState([]);
   const [groupList, setGroupList] = useState([]);
@@ -22,9 +24,8 @@ export const ActiveTagProvider = ({ children }) => {
 
   useEffect(() => {
     setActiveTagsArr(state.map((obj) => Object.values(obj)).flat(2));
+    console.log(state);
 
-    // console.log(state);
-    // console.log("ActiveTagProvider Mounted");
     findGroups(state);
     fetchData();
   }, state);
@@ -57,36 +58,23 @@ export const ActiveTagProvider = ({ children }) => {
       type: "REMOVE_TAG",
       payload: { filter, tag },
     });
-    // console.log(state);
-    // findGroupsTag(state.filter((arrTag) => arrTag !== tag));
   };
 
   // Search for groups with tags
   const findGroups = (tags) => {
-    // const groups = tags
-    //   .map((tag) => groupList.filter((group) => group.Tags.includes(tag)))
-    //   .filter((group) => group.length !== 0);
-    // console.log({ ...groups });
     const allGroups = groupList;
     const groups = tags.reduce((prevGroups, currGroups) => {
+      // Check if there are any active tags for filter, if not return all groups
       if (Object.values(currGroups)[0].length === 0) {
-        console.log("nope");
         return prevGroups;
       } else {
+        // Map through active tags
         const foundGroups = Object.values(currGroups)[0].map((tag) => {
           const filter = Object.keys(currGroups)[0];
-          // const filter =
-          //   Object.keys(currGroups)[0] === "InPerson"
-          //     ? "In Person"
-          //     : Object.keys(currGroups)[0];
-          console.log(filter);
-          // console.log(group[`${filter}`]);
+          // Return group from grouplist if the current filter inlcudes the current active tag
           return prevGroups.filter((group) => group[`${filter}`].includes(tag));
         });
-        // console.log(Object.values(currGroups)[0]);
-        // console.log(
 
-        // );
         return foundGroups.flat();
       }
     }, allGroups);
@@ -111,8 +99,6 @@ export const ActiveTagProvider = ({ children }) => {
     for (const clearTag of clearTagsArr) {
       clearTag.classList.add("hide");
     }
-
-    // activeTagsArr.forEach()
   };
   const clearAllTags = () => {
     removeAllActiveClass();
@@ -125,16 +111,26 @@ export const ActiveTagProvider = ({ children }) => {
   const clearLocalTags = (filter) => {
     const localActiveTags = state.find((obj) => obj[filter])[filter];
     console.log(localActiveTags);
-    localActiveTags.forEach((tag) =>
+    localActiveTags.forEach((tag) => {
+      console.log(
+        document.getElementsByClassName(`${tag.replace(/\s+/g, "")}`)[0]
+      );
       document
         .getElementsByClassName(`${tag.replace(/\s+/g, "")}`)[0]
-        .classList.remove("active")
-    );
+        .classList.remove("active");
+    });
     if (localActiveTags.length === activeTagsArr.length) {
       setTagsActive(false);
     }
-
-    document.getElementsByClassName(`${filter}-clear`)[0].classList.add("hide");
+    if (filter === "Singles" || filter == "Married" || filter === "Youth") {
+      document
+        .getElementsByClassName(`Demographic-clear`)[0]
+        .classList.add("hide");
+    } else {
+      document
+        .getElementsByClassName(`${filter}-clear`)[0]
+        .classList.add("hide");
+    }
     dispatch({
       type: "CLEAR_LOCAL_TAGS",
       payload: { filter },
@@ -149,6 +145,7 @@ export const ActiveTagProvider = ({ children }) => {
         clearLocalTags,
         findGroups,
         foundGroups,
+        groupList,
         removeTag,
         setTag,
         setTagsActive,

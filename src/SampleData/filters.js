@@ -5,29 +5,26 @@ const filterData = [
   },
   {
     filter: "Demographic",
-    options: [
-      "College",
-      "Everyone Welcome",
-      "Gender Specific",
-      "Married Couples",
-      "Singles",
-      "Young Adults",
-    ],
+    options: {
+      Youth: ["Adolescents (9-13)", "Youth (14-21)", "All Youth"],
+      Married: [
+        "Married Couples (Mixed)",
+        "Married Couples (Young Adults)",
+        "Married Without Children",
+        "Married With Children (All ages)",
+        "Married With Children (0-8 years)",
+        "Married With Children (14-21 years)",
+      ],
+      Singles: ["Combined Singles", "Single Men", "Single Women"],
+    },
   },
   {
     filter: "Gender",
     options: ["Combined", "Female", "Male"],
   },
   {
-    filter: "Topic",
-    options: [
-      "Book Study",
-      "Sermon Discussion",
-      "Spiritual Growth",
-      "Women",
-      "YTH Catalog",
-      "Youth Interests",
-    ],
+    filter: "Language",
+    options: ["Bilingual", "English", "Spanish"],
   },
   {
     filter: "Days",
@@ -44,6 +41,10 @@ const filterData = [
   {
     filter: "In Person",
     options: ["In-Person", "In-Person & Virtual", "Virtual "],
+  },
+  {
+    filter: "Childcare",
+    options: ["Childcare"],
   },
 ];
 
