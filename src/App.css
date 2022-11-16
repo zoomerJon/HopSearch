@@ -16,13 +16,19 @@ body {
 }
 
 .banner {
+  align-items: center;
   display: flex;
   color: white;
   cursor: pointer;
+  text-decoration: none;
   height: 30px;
   width: 100%;
   justify-content: center;
-  background-color: #00cf22;
+  background-color: #00b71e;
+}
+.banner svg {
+  margin-top: 0.3em;
+  margin-left: 0.3em;
 }
 .search-container {
   /* background-color: #ccc; */
@@ -44,6 +50,10 @@ body {
   font-weight: 600;
   font-size: medium;
   margin: 10px 0px;
+}
+.filter-heading h1 {
+  font-size: 1em;
+  font-weight: 600;
 }
 
 .filter-options {
@@ -384,7 +394,7 @@ button {
     backdrop-filter: blur(3px);
     z-index: 3;
   }
-  .filter-container h1 {
+  .filter-heading {
     text-align: center;
     background-color: #eee;
     border-radius: 15px;
@@ -396,11 +406,11 @@ button {
     max-height: 2em;
     padding: 5px;
   }
-  .active-filter h1 {
+  /* .active-filter h1 {
     background-color: rgb(119, 250, 255);
     border: 2px solid #00ccff;
     color: rgb(0, 102, 255);
-  }
+  } */
   .mobile-search-header {
     margin-left: 1em;
     margin-top: 1em;

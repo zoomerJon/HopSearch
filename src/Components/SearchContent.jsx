@@ -19,10 +19,6 @@ function SearchContent() {
 
   const setYouthTags = () => {
     document
-      .getElementsByClassName(`Demographic-container`)[0]
-      .classList.add("active-filter");
-
-    document
       .getElementsByClassName(`Demographic-clear`)[0]
       .classList.remove("hide");
     setTag("Demographic", "All Youth");

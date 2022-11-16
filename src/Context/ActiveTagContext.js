@@ -27,7 +27,15 @@ export const ActiveTagProvider = ({ children }) => {
     console.log(state);
 
     findGroups(state);
-    fetchData();
+    // fetchData();
+    const fetchGroups = async () => {
+      await fetch("/posts")
+        .then((response) => response.json())
+        .then((data) => setGroupList(data));
+    };
+    fetchGroups();
+    // const data = fetchGroups();
+    // console.log(data);
   }, state);
 
   // Fetch Data

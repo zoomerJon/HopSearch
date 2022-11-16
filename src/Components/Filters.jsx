@@ -71,7 +71,7 @@ const Filter = ({ filter, options }) => {
             toggle(filter.replace(/\s+/g, ""));
           }}
         >
-          {filter}
+          <h1>{filter}</h1>
           <DropDownArrow height={"1em"} />
         </div>
 
