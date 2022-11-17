@@ -17,16 +17,16 @@ function SearchList() {
 
   const toggleModal = (group) => {
     console.log(group);
-    if (group["Group"]) {
-      setPhone(group["Phone"]);
-      setLeader(group["Leader"]);
-      setLanguage(group["Language"]);
-      setDay(group["Days"]);
-      setTime(group["Time"]);
-      setGender(group["Gender"]);
-      setDemographic(group["Demographic"]);
-      setInPerson(group["InPerson"]);
-      setChildcare(group["Childcare"]);
+    if (group["Grupo"]) {
+      setPhone(group["Teléfono"]);
+      setLeader(group["Líder"]);
+      setLanguage(group["Idioma"]);
+      setDay(group["Dias"]);
+      setTime(group["Tiempo"]);
+      setGender(group["Género"]);
+      setDemographic(group["Demográfico"]);
+      setInPerson(group["EnPersona"]);
+      setChildcare(group["NiñosBienvenidos"]);
     }
     document.getElementsByClassName("modal")[0].classList.toggle("hide");
     document.getElementsByClassName("overlay")[0].classList.toggle("hide");
@@ -48,27 +48,27 @@ function SearchList() {
           </button>
         </div>
         <div className="modal-text">
-          <h2>About This Group</h2>
+          <h2>Sobre Este Grupo</h2>
           <div className="modal-info">
-            <h4>Group Leader(s):</h4>
+            <h4>Lider(es) de Grupo:</h4>
             <p>{leader}</p>
-            <h4>Meets on:</h4>
+            <h4>Se Encuentra En:</h4>
             <p>
-              {day}s {time}
+              {day} {time}
             </p>
-            <h4>Language(s):</h4>
+            <h4>Idioma(s):</h4>
             <p>{language}</p>
-            <h4>Gender:</h4>
+            <h4>Género:</h4>
             <p>{gender}</p>
-            <h4>Tags:</h4>
+            <h4>Temas:</h4>
             <p>{demographic}</p>
-            <h4>Location:</h4>
+            <h4>Ubicación:</h4>
             <p>{inPerson}</p>
-            <h4>Childcare:</h4>
-            <p>{childcare === "Childcare" ? "Yes" : childcare}</p>
+            <h4>Niños Bienvenidos:</h4>
+            <p>{childcare === "Niños Bienvenidos" ? "Sí" : childcare}</p>
           </div>
-          <h2>Contact Information</h2>
-          <h4 className="modal-info">Phone(s):</h4>
+          <h2>Información Del Contacto</h2>
+          <h4 className="modal-info">Número De Teléfono(s):</h4>
           {phone.map((phone, i) => (
             <p key={i} className="modal-info">
               {phone}{" "}
@@ -79,7 +79,7 @@ function SearchList() {
         {/* <input type="email" id="email" placeholder="brendaneich@js.com" />
         <button className="btn">Do Something</button> */}
       </div>
-      <h3>{foundGroups.length} Groups Found</h3>
+      <h3>{foundGroups.length} Grupos Encontrados</h3>
       {foundGroups.map((group, i) => {
         return (
           <div key={i} onClick={() => toggleModal(group)}>

@@ -8,7 +8,7 @@ export class Header extends Component {
         className="banner"
         href="https://cheerful-empanada-e83c29.netlify.app/"
       >
-        Learn More About Houses of Peace{" "}
+        Más Información Sobre Casas De Paz{" "}
         <RightArrows height={"1em"} width={"1em"} fill="#fff" />
       </a>
     );

@@ -19,64 +19,68 @@ function SearchContent() {
 
   const setYouthTags = () => {
     document
-      .getElementsByClassName(`Demographic-clear`)[0]
+      .getElementsByClassName(`Demográfico-clear`)[0]
       .classList.remove("hide");
-    setTag("Demographic", "All Youth");
-    setTag("Demographic", "Adolescents (9-13)");
-    setTag("Demographic", "Youth (14-21)");
-    document.getElementsByClassName(`AllYouth`)[0].classList.add("active");
+    setTag("Demográfico", "Mixtas (Jovenes)");
+    setTag("Demográfico", "Adolecentes 9-13 Años");
+    setTag("Demográfico", "Jovenes 14-21 Años");
     document
-      .getElementsByClassName(`Adolescents(9-13)`)[0]
+      .getElementsByClassName(`Mixtas(Jovenes)`)[0]
       .classList.add("active");
-    document.getElementsByClassName(`Youth(14-21)`)[0].classList.add("active");
+    document
+      .getElementsByClassName(`Adolecentes9-13Años`)[0]
+      .classList.add("active");
+    document
+      .getElementsByClassName(`Jovenes14-21Años`)[0]
+      .classList.add("active");
   };
 
   const setMarriedTags = () => {
     document
-      .getElementsByClassName(`Demographic-clear`)[0]
+      .getElementsByClassName(`Demográfico-clear`)[0]
       .classList.remove("hide");
-    setTag("Demographic", "Married Couples (Mixed)");
-    setTag("Demographic", "Married Couples (Young Adults)");
-    setTag("Demographic", "Married Without Children");
-    setTag("Demographic", "Married With Children (All ages)");
-    setTag("Demographic", "Married With Children (0-8 years)");
-    setTag("Demographic", "Married With Children (14-21 years)");
+    setTag("Demográfico", "Matrimonios Mixtas");
+    setTag("Demográfico", "Matrimonios (Jovene)");
+    setTag("Demográfico", "Matrimonios Sin Hijos");
+    setTag("Demográfico", "Matrimonios Con Hijos (Todos Años)");
+    setTag("Demográfico", "Matrimonios Con Hijos (0-8 Años)");
+    setTag("Demográfico", "Matrimonios Con Hijos (14-21 Años)");
     document
-      .getElementsByClassName(`MarriedCouples(Mixed)`)[0]
+      .getElementsByClassName(`MatrimoniosMixtas`)[0]
       .classList.add("active");
     document
-      .getElementsByClassName(`MarriedCouples(YoungAdults)`)[0]
+      .getElementsByClassName(`Matrimonios(Jovene)`)[0]
       .classList.add("active");
     document
-      .getElementsByClassName(`MarriedWithoutChildren`)[0]
+      .getElementsByClassName(`MatrimoniosSinHijos`)[0]
       .classList.add("active");
     document
-      .getElementsByClassName(`MarriedWithChildren(Allages)`)[0]
+      .getElementsByClassName(`MatrimoniosConHijos(TodosAños)`)[0]
       .classList.add("active");
     document
-      .getElementsByClassName(`MarriedWithChildren(0-8years)`)[0]
+      .getElementsByClassName(`MatrimoniosConHijos(0-8Años)`)[0]
       .classList.add("active");
     document
-      .getElementsByClassName(`MarriedWithChildren(14-21years)`)[0]
+      .getElementsByClassName(`MatrimoniosConHijos(14-21Años)`)[0]
       .classList.add("active");
   };
   return (
     <div className="search-content">
       <div className="search-header">
-        <h1>Find a Group!</h1>
-        <p>There's a group for you here</p>
+        <h1>Encuentra Un Grupo Aquí!</h1>
+        <p>Hay Un Grupo Para Ti</p>
       </div>
       {!tagsActive && (
         <>
           <br />
-          <h3>Explore Tags</h3>
+          <h3>Temas Populares</h3>
           <br />
           <div className="image-container">
             <img
               src={require("../Images/Group-Images/everyone.jpg")}
               alt=""
               height="150px"
-              onClick={() => searchTag("Demographic", "Everyone Welcome")}
+              onClick={() => searchTag("Demográfico", "Todos Bienvenidos")}
             />
             <img
               src={require("../Images/Group-Images/married.jpg")}
@@ -94,19 +98,19 @@ function SearchContent() {
               src={require("../Images/Group-Images/men.jpg")}
               alt=""
               height="150px"
-              onClick={() => searchTag("Gender", "Male")}
+              onClick={() => searchTag("Género", "Hombres")}
             />
             <img
               src={require("../Images/Group-Images/zoom.jpg")}
               alt=""
               height="150px"
-              onClick={() => searchTag("InPerson", "Virtual")}
+              onClick={() => searchTag("EnPersona", "Virtual")}
             />
             <img
               src={require("../Images/Group-Images/women.jpg")}
               alt=""
               height="150px"
-              onClick={() => searchTag("Gender", "Female")}
+              onClick={() => searchTag("Género", "Mujeres")}
             />
           </div>
 

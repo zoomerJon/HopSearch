@@ -1,19 +1,18 @@
 import { createContext, useEffect, useReducer, useState } from "react";
 import ActiveTagReducer from "./ActiveTagReducer";
-import groupData from "../SampleData/groupData";
+import groupData from "../Data/groupData";
 
 const ActiveTagContext = createContext();
 
 export const ActiveTagProvider = ({ children }) => {
   const initialState = [
-    { Campus: [] },
-    { Demographic: [] },
-    { Youth: [] },
-    { Gender: [] },
-    { Language: [] },
-    { Days: [] },
-    { InPerson: [] },
-    { Childcare: [] },
+    { Ubicación: [] },
+    { Demográfico: [] },
+    { Género: [] },
+    { Idioma: [] },
+    { Dias: [] },
+    { EnPersona: [] },
+    { NiñosBienvenidos: [] },
   ];
   const [activeTagsArr, setActiveTagsArr] = useState([]);
   const [groupList, setGroupList] = useState([]);
@@ -27,16 +26,16 @@ export const ActiveTagProvider = ({ children }) => {
     console.log(state);
 
     findGroups(state);
-    // fetchData();
+  }, state);
+
+  useEffect(() => {
     const fetchGroups = async () => {
       await fetch("/posts")
         .then((response) => response.json())
         .then((data) => setGroupList(data));
     };
     fetchGroups();
-    // const data = fetchGroups();
-    // console.log(data);
-  }, state);
+  }, []);
 
   // Fetch Data
   const fetchData = () => {

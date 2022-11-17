@@ -56,7 +56,7 @@ function FilterOptions({ options, filter, toggleOverlay }) {
               toggleOverlay(filter.replace(/\s+/g, ""));
             }}
           >
-            Done
+            Terminado
           </p>
         </div>
         {
@@ -68,16 +68,16 @@ function FilterOptions({ options, filter, toggleOverlay }) {
           </div>
         }
         <div className={`filter-options `}>
-          {filter === "Demographic" && (
+          {filter === "Demográfico" && (
             <div
-              className={`filter-option EveryoneWelcome`}
+              className={`filter-option TodosBienvenidos`}
               key={"key"}
-              onClick={(e) => handleClick(e, "Demographic")}
+              onClick={(e) => handleClick(e, "Demográfico")}
             >
-              Everyone Welcome
+              Todos Bienvenidos
             </div>
           )}
-          {filter === "Demographic"
+          {filter === "Demográfico"
             ? Object.keys(options).map((subfilter, i) => {
                 return (
                   <div key={i} className="demographics-suboption">
