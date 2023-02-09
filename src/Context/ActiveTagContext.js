@@ -1,6 +1,6 @@
 import { createContext, useEffect, useReducer, useState } from "react";
 import ActiveTagReducer from "./ActiveTagReducer";
-import groupData from "../Data/groupData";
+import groupDataSpanish from "../Data/groupDataSpanish";
 
 const ActiveTagContext = createContext();
 
@@ -29,17 +29,20 @@ export const ActiveTagProvider = ({ children }) => {
   }, state);
 
   useEffect(() => {
-    const fetchGroups = async () => {
-      await fetch("/posts")
-        .then((response) => response.json())
-        .then((data) => setGroupList(data));
-    };
-    fetchGroups();
+    // const fetchGroups = async () => {
+    //   await fetch("https://house-of-peace-api.herokuapp.com/posts")
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       setGroupList(data);
+    //     });
+    // };
+    // fetchGroups();
+    fetchData();
   }, []);
 
   // Fetch Data
   const fetchData = () => {
-    setGroupList(groupData);
+    setGroupList(groupDataSpanish);
   };
 
   // Set Tag

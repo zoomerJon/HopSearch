@@ -2,7 +2,7 @@
   "name": "hop_search",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jovalle0103.wpcomstaging.com/react-app/",
+  "homepage": "http://www.aguilascfc.org/casas-de-paz-grupos/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "react-scripts build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
